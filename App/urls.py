@@ -3,5 +3,5 @@ from App import views
 
 
 urlpatterns = [
-    path('', views.Home),
+    path('', views.Home,name="index"),
 ]

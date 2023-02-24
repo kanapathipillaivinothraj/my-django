@@ -4,5 +4,5 @@ from django.http import HttpResponse
 
 
 def Home (request):
-    A = "<h1>Hello</h1>"
-    return HttpResponse(A)
+    msg = "Hello"
+    return render(request,"index.html",{"A":msg})
