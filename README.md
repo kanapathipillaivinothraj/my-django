@@ -98,7 +98,7 @@ return HttpResponse(A)
    def Home (request):
    return render(request,"index.html")
 
-# Create static and connect to settings.py file #7
+# Create static and connect to settings.py file #8
 
 1. Create Static folder and create a new css file (style.css)
 2. settings.py =>
@@ -109,7 +109,7 @@ return HttpResponse(A)
 <img src="{% static 'img/home.png' %}" alt="image" srcset="" width="100"> // static => inbuild static variable & 'img/home.png' => file path
 <script src="{% static 'jsfile/index.js' %}"></script> // static => inbuild static variable & 'jsfile/index.js' => file path
 
-# MVT => Model View Template & Admin User Account
+# MVT => Model View Template & Admin User Account #9
 
 1. App => models.py
 Create a model class 
