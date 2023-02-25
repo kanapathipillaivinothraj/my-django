@@ -87,13 +87,23 @@ return HttpResponse(A)
 # Create Template and connect to settings.py file #7
 
 1. Create template folder and create a new html file (index.html)
-2. settings.py => 
-    import os
-    TEMPLATES = [
-        {
-            'DIRS': [os.path.join(BASE_DIR/"Template")], // connect the template folder
-        }
-    ]
+2. settings.py =>
+   import os
+   TEMPLATES = [
+   {
+   'DIRS': [os.path.join(BASE_DIR/"Template")], // connect the template folder
+   }
+   ]
 3. call the function
-    def Home (request):
-    return render(request,"index.html")
+   def Home (request):
+   return render(request,"index.html")
+
+# Create static and connect to settings.py file #7
+
+1. Create Static folder and create a new css file (style.css)
+2. settings.py =>
+   STATICFILES_DIRS = [BASE_DIR/"Static"] // Create to STATICFILES_DIRS = [BASE_DIR/"Static"] for connect the Static folder
+3. index.html =>
+    {% load static %} <!-- inbuild function for load static -->
+    <link rel="stylesheet" href="{% static 'style.css' %}"> // static => inbuild static variable & 'style.css' => file path eg:- style/style.css
+    <script src="{% static 'jsfile/index.js' %}"></script> // static => inbuild static variable & 'jsfile/index.js' => file path 
