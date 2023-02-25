@@ -104,7 +104,7 @@ return HttpResponse(A)
 2. settings.py =>
    STATICFILES_DIRS = [BASE_DIR/"Static"] // Create to STATICFILES_DIRS = [BASE_DIR/"Static"] for connect the Static folder
 3. index.html =>
-{% load static %} <!-- inbuild function for load static -->
+{% load static %} <!-- inbuild function for load static/ Jinja tags -->
 <link rel="stylesheet" href="{% static 'style.css' %}"> // static => inbuild static variable & 'style.css' => file path eg:- style/style.css
 <img src="{% static 'img/home.png' %}" alt="image" srcset="" width="100"> // static => inbuild static variable & 'img/home.png' => file path
 <script src="{% static 'jsfile/index.js' %}"></script> // static => inbuild static variable & 'jsfile/index.js' => file path
@@ -126,8 +126,8 @@ Create a model class
 
 2. makemigrations and migrate => 
     Terminal or CMD 
-        makemigrations // py manage.py makemigrations App
-        migrate // py manage.py migrate
+        makemigrations // py manage.py makemigrations App // Create Sql query
+        migrate // py manage.py migrate // Pass Sql query
         check database sqlmigrate Appname databasenumber // py manage.py sqlmigrate Appname databasenumber :- py manage.py sqlmigrate App 0002
 
 3. admin User => 
@@ -145,7 +145,7 @@ Create a model class
         admin.site.register(detail_dataBase,controaler_data) // detail_dataBase -> register the database , controaler_data -> controle the database
 
 5. View the Data
-    App => Views.py 
+    1. App => Views.py 
 
     from App.models import detail_dataBase // import the detail_dataBase
     def Home (request):
@@ -153,7 +153,7 @@ Create a model class
         datas = detail_dataBase.objects.all()
         return render(request,"index.html",{"data":datas,'A' :msg})
 
-    idex.html =>
+    2. index.html =>
     {% if data %}
         {% for 1_data in data %}
             <h3>{{1_data.No}}</h3>

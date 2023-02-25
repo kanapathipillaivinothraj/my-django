@@ -24,8 +24,9 @@
     <h3>{{1_data.No}}</h3>
     <h3>{{1_data.Name}}</h3>
     <h3>{{1_data.Address}}</h3>
-    <h3>{{1_data.Image}}</h3>
-    <h3>{{1_data.Links}}</h3>
+    <img src="{{1_data.Image}}" alt="img" srcset="">
+    <h3>
+      link: <a href="{{1_data.Links}}" target="_blank">github</a></h3>
     <h3>{{1_data.Salary}}</h3>
     {% endfor %}
     {% else %}
