@@ -15,6 +15,23 @@
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat adipisci eaque, cupiditate doloremque commodi
     <h1>{{A}}</h1>
     sint eum architecto, porro quam velit, illo blanditiis odio officiis fuga totam asperiores? Quis, sapiente dolorum.
+    <br>
+    <img src="{% static 'img/home.png' %}" alt="image" srcset="" width="100">
+
+    <h1>1_data</h1>
+    {% if data %}
+    {% for 1_data in data %}
+    <h3>{{1_data.No}}</h3>
+    <h3>{{1_data.Name}}</h3>
+    <h3>{{1_data.Address}}</h3>
+    <h3>{{1_data.Image}}</h3>
+    <h3>{{1_data.Links}}</h3>
+    <h3>{{1_data.Salary}}</h3>
+    {% endfor %}
+    {% else %}
+   <h3> nodata</h3>
+    {% endif %}
+
     {% endblock content %}
     <script src="{% static 'jsfile/index.js' %}"></script>
 </body>

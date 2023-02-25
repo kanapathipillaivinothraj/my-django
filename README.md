@@ -104,6 +104,67 @@ return HttpResponse(A)
 2. settings.py =>
    STATICFILES_DIRS = [BASE_DIR/"Static"] // Create to STATICFILES_DIRS = [BASE_DIR/"Static"] for connect the Static folder
 3. index.html =>
-    {% load static %} <!-- inbuild function for load static -->
-    <link rel="stylesheet" href="{% static 'style.css' %}"> // static => inbuild static variable & 'style.css' => file path eg:- style/style.css
-    <script src="{% static 'jsfile/index.js' %}"></script> // static => inbuild static variable & 'jsfile/index.js' => file path 
+{% load static %} <!-- inbuild function for load static -->
+<link rel="stylesheet" href="{% static 'style.css' %}"> // static => inbuild static variable & 'style.css' => file path eg:- style/style.css
+<img src="{% static 'img/home.png' %}" alt="image" srcset="" width="100"> // static => inbuild static variable & 'img/home.png' => file path
+<script src="{% static 'jsfile/index.js' %}"></script> // static => inbuild static variable & 'jsfile/index.js' => file path
+
+# MVT => Model View Template & Admin User Account
+
+1. App => models.py
+Create a model class 
+    class detail_dataBase(models.Model):
+        No = models.IntegerField()
+        Name = models.CharField(max_length=255,null=False,blank=False)
+        Address = models.TextField(max_length=255,null=False,blank=False)
+        Image = models.ImageField()
+        Links = models.URLField(null=True,blank=True)
+        Salary = models.FloatField()
+
+        def __str__(self): // database name
+            return self.Name // show name tag
+
+2. makemigrations and migrate => 
+    Terminal or CMD 
+        makemigrations // py manage.py makemigrations App
+        migrate // py manage.py migrate
+        check database sqlmigrate Appname databasenumber // py manage.py sqlmigrate Appname databasenumber :- py manage.py sqlmigrate App 0002
+
+3. admin User => 
+    Terminal or CMD 
+        py manage.py createsuperuser
+
+
+4. App => admin.py
+    Register the model 
+        from Appname.models import  Classname // from App.models import detail_dataBase
+
+        class controaler_data(admin.ModelAdmin):
+            details = ['No','Name','Address','Image','Links','Salary']
+
+        admin.site.register(detail_dataBase,controaler_data) // detail_dataBase -> register the database , controaler_data -> controle the database
+
+5. View the Data
+    App => Views.py 
+
+    from App.models import detail_dataBase // import the detail_dataBase
+    def Home (request):
+        msg = "Hello"
+        datas = detail_dataBase.objects.all()
+        return render(request,"index.html",{"data":datas,'A' :msg})
+
+    idex.html =>
+    {% if data %}
+        {% for 1_data in data %}
+            <h3>{{1_data.No}}</h3>
+            <h3>{{1_data.Name}}</h3>
+            <h3>{{1_data.Address}}</h3>
+            <h3>{{1_data.Image}}</h3>
+            <h3>{{1_data.Links}}</h3>
+            <h3>{{1_data.Salary}}</h3>
+        {% endfor %}
+    {% else %}
+        <h3> nodata</h3>
+    {% endif %}
+
+    
