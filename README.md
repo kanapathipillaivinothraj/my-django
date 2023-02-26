@@ -111,60 +111,108 @@ return HttpResponse(A)
 
 # MVT => Model View Template & Admin User Account #9
 
-1. App => models.py
-Create a model class 
+# Models - M
+
+1.  App => models.py
+    Create a model class
     class detail_dataBase(models.Model):
-        No = models.IntegerField()
-        Name = models.CharField(max_length=255,null=False,blank=False)
-        Address = models.TextField(max_length=255,null=False,blank=False)
-        Image = models.ImageField()
-        Links = models.URLField(null=True,blank=True)
-        Salary = models.FloatField()
+    No = models.IntegerField()
+    Name = models.CharField(max_length=255,null=False,blank=False)
+    Address = models.TextField(max_length=255,null=False,blank=False)
+    Image = models.ImageField()
+    Links = models.URLField(null=True,blank=True)
+    Salary = models.FloatField()
 
-        def __str__(self): // database name
-            return self.Name // show name tag
+            def __str__(self): // database name
+                return self.Name // show name tag
 
-2. makemigrations and migrate => 
-    Terminal or CMD 
-        makemigrations // py manage.py makemigrations App // Create Sql query
-        migrate // py manage.py migrate // Pass Sql query
-        check database sqlmigrate Appname databasenumber // py manage.py sqlmigrate Appname databasenumber :- py manage.py sqlmigrate App 0002
+2.  makemigrations and migrate =>
+    Terminal or CMD
+    makemigrations // py manage.py makemigrations App // Create Sql query
+    migrate // py manage.py migrate // Pass Sql query
+    check database sqlmigrate Appname databasenumber // py manage.py sqlmigrate Appname databasenumber :- py manage.py sqlmigrate App 0002
 
-3. admin User => 
-    Terminal or CMD 
-        py manage.py createsuperuser
+3.  admin User =>
+    Terminal or CMD
+    py manage.py createsuperuser
 
-
-4. App => admin.py
-    Register the model 
-        from Appname.models import  Classname // from App.models import detail_dataBase
+4.  App => admin.py
+    Register the model
+    from Appname.models import Classname // from App.models import detail_dataBase
 
         class controaler_data(admin.ModelAdmin):
             details = ['No','Name','Address','Image','Links','Salary']
 
         admin.site.register(detail_dataBase,controaler_data) // detail_dataBase -> register the database , controaler_data -> controle the database
 
+# Views - V
+
 5. View the Data
-    1. App => Views.py 
 
-    from App.models import detail_dataBase // import the detail_dataBase
-    def Home (request):
-        msg = "Hello"
-        datas = detail_dataBase.objects.all()
-        return render(request,"index.html",{"data":datas,'A' :msg})
+   1. App => Views.py
 
-    2. index.html =>
+   from App.models import detail_dataBase // import the detail_dataBase
+   def Home (request):
+   msg = "Hello"
+   datas = detail_dataBase.objects.all()
+   return render(request,"index.html",{"data":datas,'A' :msg})
+
+   2. index.html =>
+      {% if data %}
+      {% for 1_data in data %}
+      <h3>{{1_data.No}}</h3>
+      <h3>{{1_data.Name}}</h3>
+      <h3>{{1_data.Address}}</h3>
+      <h3>{{1_data.Image}}</h3>
+      <h3>{{1_data.Links}}</h3>
+      <h3>{{1_data.Salary}}</h3>
+      {% endfor %}
+      {% else %}
+      <h3> nodata</h3>
+      {% endif %}
+
+# Templates - T
+
+6. App => Create Forms.py file and create a new class detail_dataBase_Froms
+   from django import forms // import forms function
+
+   class detail_dataBase_Froms (forms.Form):
+   No = forms.IntegerField(required=False)
+   Name = forms.CharField(required=False)
+   Address = forms.Textarea()
+   Image = forms.ImageField(required=False)
+   Links = forms.URLField(required=False )
+   Salary = forms.FloatField(required=False)
+
+7. View the Form
+
+   1. App => Views.py
+
+   from App.models import detail_dataBase // import the detail_dataBase
+   from App.forms import detail_dataBase_Froms // import the detail_dataBase_Froms
+
+   def Home (request):
+   form = detail_dataBase_Froms()
+   datas = detail_dataBase.objects.all()
+   return render(request,"index.html",{"data":datas,'A' :form})
+
+   2. index.html =>
+
+   <form method="post">
+       {% csrf_token %}
+    {{A.as_p}}
+   <input type="submit" value="OK">
+   </form>
+   <hr>
     {% if data %}
-        {% for 1_data in data %}
-            <h3>{{1_data.No}}</h3>
-            <h3>{{1_data.Name}}</h3>
-            <h3>{{1_data.Address}}</h3>
-            <h3>{{1_data.Image}}</h3>
-            <h3>{{1_data.Links}}</h3>
-            <h3>{{1_data.Salary}}</h3>
-        {% endfor %}
+    {% for 1_data in data %}
+    <h3>{{1_data.No}}</h3>
+    <h3>{{1_data.Name}}</h3>
+    <h3>{{1_data.Address}}</h3>
+    <h3>{{1_data.Image}}</h3>
+    <h3>{{1_data.Links}}</h3>
+    <h3>{{1_data.Salary}}</h3>
+    {% endfor %}
     {% else %}
-        <h3> nodata</h3>
+    <h3> nodata</h3>
     {% endif %}
-
-    
