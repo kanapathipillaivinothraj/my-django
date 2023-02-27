@@ -216,3 +216,19 @@ return HttpResponse(A)
     {% else %}
     <h3> nodata</h3>
     {% endif %}
+
+
+
+
+# CURD => Create, Update, read, Delete #9
+
+1. Create -> Insert data
+
+   App => Create Model_form.py file
+   from App.models import detail_dataBase // import model class name
+   from django import forms // import forms class in django
+
+   class Model_forms(forms.ModelForm):
+      class Meta: // Subclass Meta
+         model = detail_dataBase // Model name detail_dataBase
+         fields = ['No','Name', 'Address','Image', 'Links', 'Salary' ] // form felid or fields = '__all__' / exclude = ['No']
