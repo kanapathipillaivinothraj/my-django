@@ -17,13 +17,13 @@ def Home (request):
             redirect('index')
     return render(request,"index.html",{"data":datas,'A' :form, 'model_form':model_form})
 
-def Update (request):
-    form = detail_dataBase_Froms()
-    datas = detail_dataBase.objects.all()
-    model_form = Model_forms()
-    if request.method ==  "POST":
-        Database = Model_forms(request.POST)
-        if Database.is_valid():
-            Database.save()
-            redirect('index')
-    return render(request,"index.html",{"data":datas,'A' :form, 'model_form':model_form})
+# def Update (request):
+#     form = detail_dataBase_Froms()
+#     datas = detail_dataBase.objects.all()
+#     model_form = Model_forms()
+#     if request.method ==  "POST":
+#         Database = Model_forms(request.POST)
+#         if Database.is_valid():
+#             Database.save()
+#             redirect('index')
+#     return render(request,"index.html",{"data":datas,'A' :form, 'model_form':model_form})
