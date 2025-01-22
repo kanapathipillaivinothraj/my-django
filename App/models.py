@@ -10,4 +10,6 @@ class detail_dataBase(models.Model):
     Salary = models.FloatField()
 
     def __str__(self):
+        print("return")
         return self.Name
+    # test
